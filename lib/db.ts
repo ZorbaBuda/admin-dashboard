@@ -6,7 +6,7 @@ const connect = async () => {
     const connectionState = mongoose.connection.readyState;
 
     if(connectionState === 1) {
-        console.log("Already connected");
+        // console.log("Already connected");
         return;
     }
 
@@ -16,7 +16,7 @@ const connect = async () => {
     }
 
     try {
-        mongoose.connect(MONGODB_URI!, {
+       await mongoose.connect(MONGODB_URI!, {
             dbName: MONGODB_DB!,
             bufferCommands: false
         })

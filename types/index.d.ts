@@ -23,7 +23,7 @@ type FeaturedImage = {
 };
 
 type TBlog = {
-  id: string;
+  _id: string;
   title: string;
   slug: string;
   body: string;
@@ -39,7 +39,7 @@ type TBlog = {
 };
 
 type TCategory = {
-  id: string,
+  _id: string,
   categoryName: string,
   slug: string,
   description: string,

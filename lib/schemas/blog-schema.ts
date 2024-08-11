@@ -25,7 +25,7 @@ export const blogSchema = z.object({
   metaDescription: z.string().min(1, "Meta description is required"),
   categories: z.array(z.string()).min(1, "Atleast 1 category is required"),
   // tags: z.array(z.string()).min(1, "Atleast 1 category is required"),
-  tags: z.array(z.string()).optional(),
+  // tags: z.array(z.string()).optional(),
   featuredImage: mediaSchema,
   bodyImages: z.array(mediaSchema).optional(),
   published: z.boolean(),

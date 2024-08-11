@@ -4,14 +4,12 @@ import Category from "@/lib/models/category.model";
 import escapeStringRegexp from "escape-string-regexp";
 
 export async function getCategories({
-  userId,
   sortBy,
   orderBy,
   limitNumber,
   pageNumber,
   categoryName,
 }: {
-  userId: string;
   sortBy?: string;
   orderBy?: string;
   limitNumber?: number;
@@ -53,7 +51,7 @@ export async function getCategories({
 
   await connect() 
 
-  const result = await Category.find({userId})
+  const result = await Category.find()
      .sort("createdAt")
   
   // const categories = await Category.find({
@@ -74,7 +72,7 @@ export async function getCategories({
 
   // const categories = await Category.find()
 
-  const categoriesCount = await Category.countDocuments({userId})
+  const categoriesCount = await Category.countDocuments()
 
   // const categoriesCount = await Category.countDocuments({
   //   where: {

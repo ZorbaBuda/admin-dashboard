@@ -113,6 +113,9 @@ export async function addBlog({ values }: { values: BlogProps }) {
       }
      }
 
+     //TODO on demand revalidation on the client
+    // if(published){} 
+
     revalidatePath("/", "layout");
 
      const result = JSON.parse(JSON.stringify(response))

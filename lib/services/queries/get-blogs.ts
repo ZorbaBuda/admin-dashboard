@@ -7,7 +7,7 @@ import {  TBlog } from "@/types";
 import { parseStringify } from "@/lib/utils";
 
 type TBlogSearch = {
-    userId: string,
+   
     sortBy?: string,
     orderBy?: string,
     limitNumber?: number,
@@ -15,7 +15,6 @@ type TBlogSearch = {
     title?: string,
 }
 export async function getBlogs({
-    userId,
     sortBy,
     orderBy,
     limitNumber,
@@ -73,12 +72,13 @@ export async function getBlogs({
 
     await connect()
 
-    const blogs  = await Blog.find({userId: userId})
+    const blogs  = await Blog.find()
   .skip(skip)
   .limit(take)
   .sort(sorting)
 
-  const blogsCount = await Blog.countDocuments({userId : userId});
+  const blogsCount = await Blog.countDocuments();
+
 
   // const blogs = JSON.parse(JSON.stringify(response))
   const result = {

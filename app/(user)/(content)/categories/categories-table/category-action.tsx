@@ -1,6 +1,6 @@
 "use client";
 
-import type { Category } from "@prisma/client";
+import type { TCategory } from "@/types";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Row } from "@tanstack/react-table";
@@ -15,14 +15,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DeleteModal } from "@/components/modals/delete-modal";
 import { EditCategoryModal } from "@/components/modals/edit-category-modal";
-import { deleteCategory } from "@/db/user/mutations/delete-category";
+import { deleteCategory } from "@/lib/services/mutations/delete-category";
 
 interface CategoryAction<TData> {
   row: Row<TData>;
 }
 
 export function CategoryAction<TData>({ row }: CategoryAction<TData>) {
-  const category = row.original as Category;
+  const category = row.original as TCategory;
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -33,7 +33,7 @@ export function CategoryAction<TData>({ row }: CategoryAction<TData>) {
     // console.log("delete id", category.id);
     setIsDeleting(true);
 
-    const result = await deleteCategory({ deleteId: category.id });
+    const result = await deleteCategory({ deleteId: category._id });
 
     console.log("result", result);
 
@@ -82,7 +82,7 @@ export function CategoryAction<TData>({ row }: CategoryAction<TData>) {
       />
 
       <DeleteModal
-        key={category.id}
+        key={category._id}
         showDeleteModal={showDeleteModal}
         setShowDeleteModal={setShowDeleteModal}
         title={`Do you want to delete "${category.categoryName}"?`}

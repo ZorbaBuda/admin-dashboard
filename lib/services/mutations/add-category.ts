@@ -6,6 +6,7 @@ import { CategoryProps, categorySchema } from "@/lib/schemas/category-schema";
 import escapeStringRegexp from "escape-string-regexp";
 import { revalidatePath } from "next/cache";
 import Category from "@/lib/models/category.model";
+import { parseStringify } from "@/lib/utils";
 
 export async function addCategory({ values }: { values: CategoryProps }) {
   const session = await getAuthSession();
@@ -89,11 +90,9 @@ export async function addCategory({ values }: { values: CategoryProps }) {
 
     revalidatePath("/", "layout");
 
-    return {
-      success: "Category created successfully",
-      data: response,
-    };
+    return  parseStringify({success: "Category created successfully", data: response})
+  
   } catch (error) {
-    return { error: "Something went wrong", data: error };
+    return parseStringify({ error: "Something went wrong", data: error });
   }
 }

@@ -31,7 +31,7 @@ export default async function BlogPage({
   const orderBy = sortValues?.[1];
 
   const { blogs, blogsCount } = await getBlogs({
-    userId,
+    // userId,
     sortBy,
     orderBy,
     limitNumber,

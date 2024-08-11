@@ -171,7 +171,7 @@ export default function AddBlogForm({
                   {categories.length ? (
                     categories.map((category) => (
                       <CheckboxField
-                        key={category.id}
+                        key={category._id}
                         label={category.categoryName}
                         name="categories"
                         // value={category.categoryName}

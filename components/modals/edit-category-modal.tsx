@@ -1,4 +1,4 @@
-import type { Category } from "@prisma/client";
+import type { TCategory } from "@/types";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,11 +10,11 @@ import { Spinner } from "@/components/spinner";
 import { Button } from "@/components/ui/button";
 import { InputField } from "@/components/form-fields/input-field";
 import { TextareaField } from "@/components/form-fields/textarea-field";
-import { editCategory } from "@/db/user/mutations/edit-category";
-import { CategoryProps, categorySchema } from "@/schemas/category-schema";
+import { editCategory } from "@/lib/services/mutations/edit-category";
+import { CategoryProps, categorySchema } from "@/lib/schemas/category-schema";
 
 type EditCategoryModalProps = {
-  category: Category;
+  category: TCategory;
   showEditModal: boolean;
   setShowEditModal: (arg: boolean) => void;
 };
@@ -57,7 +57,7 @@ export function EditCategoryModal({
     // console.log("values", values);
     // return;
 
-    const result = await editCategory({ categoryId: category.id, values });
+    const result = await editCategory({ categoryId: category._id, values });
 
     console.log("result", result);
 

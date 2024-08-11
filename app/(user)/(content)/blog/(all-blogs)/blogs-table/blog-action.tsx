@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DeleteModal } from "@/components/modals/delete-modal";
-import { deleteBlog } from "@/db/user/mutations/delete-blog";
+import { deleteBlog } from "@/lib/services/mutations/delete-blog";
 
 interface BlogAction<TData> {
   row: Row<TData>;
@@ -23,6 +23,8 @@ interface BlogAction<TData> {
 
 export function BlogAction<TData>({ row }: BlogAction<TData>) {
   const blog = row.original as TBlog;
+ 
+  console.log("_id", blog._id)
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -31,7 +33,7 @@ export function BlogAction<TData>({ row }: BlogAction<TData>) {
     // console.log("delete id", category.id);
     setIsDeleting(true);
 
-    const result = await deleteBlog({ deleteId: blog.id });
+    const result = await deleteBlog({ deleteId: blog._id });
 
     console.log("result", result);
 
@@ -85,7 +87,7 @@ export function BlogAction<TData>({ row }: BlogAction<TData>) {
       </DropdownMenu>
 
       <DeleteModal
-        key={blog.id}
+        key={blog._id}
         showDeleteModal={showDeleteModal}
         setShowDeleteModal={setShowDeleteModal}
         title={`Do you want to delete "${blog.title}"?`}
