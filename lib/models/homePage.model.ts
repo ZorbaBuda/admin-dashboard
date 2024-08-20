@@ -1,19 +1,23 @@
 import { Schema, model, models } from "mongoose";
 
-const Home1Schema = new Schema({
+const HomeSchema = new Schema({
   en: {
-    title: { type: String },
-    text: { type: String },
-    linkText: { type: String },
+    home1: {
+      title: { type: String },
+      text: { type: String },
+      linkText: { type: String },
+    },
   },
   es: {
-    title: { type: String },
-    text: { type: String },
-    linkText: { type: String },
+    home1: {
+      title: { type: String },
+      text: { type: String },
+      linkText: { type: String },
+    },
   },
 });
 
-export const Home1 = models.Home1 || model("Home1", Home1Schema);
+export const Home = models.Home || model("Home1", HomeSchema);
 
 // const homeIntro1 = {
 //     title: `Una visió holística`,
