@@ -17,18 +17,39 @@ import { editHome } from "@/lib/actions/home.actions";
 
 export  default  function HomeForm() {
   const [loading, setLoading] = useState<boolean>(true)
-  const [homeData, setHomeData] = useState<HomeProps>()
   const [error, setError] = useState<string | null>(null)
+  const [defValues, setDefValues] = useState<HomeProps>()
+  const [homeId, setHomeId] = useState<string>("")
 
   useEffect( () => {
     const fetchHomeData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/homeData")
+        const response = await fetch("http://localhost:3000/api/homeData")
         if(!response.ok){
           throw new Error("Response was not ok")
         }
         const data = await response.json()
-        setHomeData(data)
+        console.log(data[0].en.home1.title)
+           setHomeId(data[0]._id)
+        // const defaultVal = {
+        //   en: {
+        //         home1: {
+        //           title: data[0].en.home1.title,
+        //           text: data[0].en.home1.text,
+        //           linkText: data[0].en.home1.linkText,
+        //         },
+        //       },
+        //       es: {
+        //         home1: {
+        //           title: data[0].es.home1.title,
+        //           text: data[0].es.home1.text,
+        //           linkText: data[0].es.home1.linkText,
+        //         },
+        //       },
+        // }
+      
+        setDefValues(data[0])
+        
       }catch(err) {
         if(err instanceof Error) {
           setError(err.message)
@@ -43,22 +64,22 @@ export  default  function HomeForm() {
     fetchHomeData()
   }, [])
 
-  if(loading) { return <p>Loading...</p>}
-  if(error) { return <p>Error: {error}</p>}
-  
+  //  if(loading) { return <p>Loading...</p>}
+  // if(error) { return <p>Error: {error}</p>}
+
   const defaultValues = {
     en: {
       home1: {
-        title: "",
-        text: "",
-        linkText: "",
+        title: defValues?.en.home1.title,
+        text: defValues?.en.home1.text,
+        linkText: defValues?.en.home1.linkText,
       },
     },
     es: {
       home1: {
-        title: "",
-        text: "",
-        linkText: "",
+        title: defValues?.es.home1.title,
+        text: defValues?.es.home1.text,
+        linkText: defValues?.es.home1.linkText,
       },
     },
   };
@@ -67,6 +88,8 @@ export  default  function HomeForm() {
     defaultValues,
     resolver: zodResolver(homeSchema),
   });
+
+  console.log(defaultValues)
 
   const {
     // setError,
@@ -87,6 +110,9 @@ export  default  function HomeForm() {
       toast.error("Error");
     }
   };
+
+     if(loading) { return <p>Loading...</p>}
+     if(error) { return <p>Error: {error}</p>}
 
   return (
     <div className="w-full mt-16">

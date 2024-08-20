@@ -17,7 +17,7 @@ const HomeSchema = new Schema({
   },
 });
 
-export const Home = models.Home || model("Home1", HomeSchema);
+export const Home = models.Home || model("Home", HomeSchema);
 
 // const homeIntro1 = {
 //     title: `Una visió holística`,
