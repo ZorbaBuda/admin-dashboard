@@ -59,3 +59,4 @@ type TMedia = {
   createdAt: string,
   updatedAt: string,
 }
+

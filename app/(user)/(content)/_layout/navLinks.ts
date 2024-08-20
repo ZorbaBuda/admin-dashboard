@@ -15,6 +15,11 @@ export const navLinks = [
     icon: IconDashboard,
   },
   {
+   name: "Pages",
+   link: "/pages",
+   icon: IconBlog,
+  },
+  {
     name: "Blog",
     link: "/blog",
     icon: IconBlog,
