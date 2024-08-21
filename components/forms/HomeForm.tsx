@@ -13,76 +13,15 @@ import { addBlog } from "@/lib/services/mutations/add-blog";
 import { BlogProps, blogSchema } from "@/lib/schemas/blog-schema";
 import { getDescription } from "@/utils/get-description";
 import { HomeProps, homeSchema } from "@/lib/schemas/home-page-schemas";
-import { editHome } from "@/lib/actions/home.actions";
+import { createHome, editHome } from "@/lib/actions/home.actions";
+import { homeDefaultValues, PublishTypes } from "@/lib/data";
+import { publishToClient } from "@/lib/actions/publish.actions";
 
-export  default  function HomeForm() {
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
-  const [defValues, setDefValues] = useState<HomeProps>()
-  const [homeId, setHomeId] = useState<string>("")
-
-  useEffect( () => {
-    const fetchHomeData = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/api/homeData")
-        if(!response.ok){
-          throw new Error("Response was not ok")
-        }
-        const data = await response.json()
-        console.log(data[0].en.home1.title)
-           setHomeId(data[0]._id)
-        // const defaultVal = {
-        //   en: {
-        //         home1: {
-        //           title: data[0].en.home1.title,
-        //           text: data[0].en.home1.text,
-        //           linkText: data[0].en.home1.linkText,
-        //         },
-        //       },
-        //       es: {
-        //         home1: {
-        //           title: data[0].es.home1.title,
-        //           text: data[0].es.home1.text,
-        //           linkText: data[0].es.home1.linkText,
-        //         },
-        //       },
-        // }
-      
-        setDefValues(data[0])
-        
-      }catch(err) {
-        if(err instanceof Error) {
-          setError(err.message)
-        } else {
-          setError("An unknown error ocurred")
-        }
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchHomeData()
-  }, [])
-
-  //  if(loading) { return <p>Loading...</p>}
-  // if(error) { return <p>Error: {error}</p>}
-
-  const defaultValues = {
-    en: {
-      home1: {
-        title: defValues?.en.home1.title,
-        text: defValues?.en.home1.text,
-        linkText: defValues?.en.home1.linkText,
-      },
-    },
-    es: {
-      home1: {
-        title: defValues?.es.home1.title,
-        text: defValues?.es.home1.text,
-        linkText: defValues?.es.home1.linkText,
-      },
-    },
-  };
+export  default  function HomeForm({
+  id, defaultValues =homeDefaultValues
+} : { 
+  id?: string, defaultValues?: HomeProps 
+}) {
 
   const form = useForm<HomeProps>({
     defaultValues,
@@ -99,8 +38,14 @@ export  default  function HomeForm() {
 
   const onSubmit = async (values: HomeProps) => {
     // console.log("values", values);
+    let result
 
-    const result = await editHome({ values });
+    if(id){
+      result = await editHome({values, id})
+    }
+    else{
+      result = await createHome({ values });
+    }
 
     if (result.success) {
       toast.success(result.success);
@@ -111,8 +56,10 @@ export  default  function HomeForm() {
     }
   };
 
-     if(loading) { return <p>Loading...</p>}
-     if(error) { return <p>Error: {error}</p>}
+  const handlePublish = async () => {
+    console.log("publisshhhh!")
+    const result = await publishToClient(PublishTypes.HOME_PAGE)
+  }
 
   return (
     <div className="w-full mt-16">
@@ -154,7 +101,7 @@ export  default  function HomeForm() {
                   </Button>
                   <Button
                     type="submit"
-                    // onClick={() => setValue("published", true)}
+                     onClick={() => handlePublish()}
                     disabled={isSubmitting}
                     className="w-[178px] flex justify-center items-center rounded-full gap-2.5"
                   >
