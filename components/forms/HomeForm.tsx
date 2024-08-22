@@ -17,18 +17,19 @@ import { createHome, editHome } from "@/lib/actions/home.actions";
 import { homeDefaultValues, PublishTypes } from "@/lib/data";
 import { publishToClient } from "@/lib/actions/publish.actions";
 
-export  default  function HomeForm({
-  id, defaultValues =homeDefaultValues
-} : { 
-  id?: string, defaultValues?: HomeProps 
+export default function HomeForm({
+  id,
+  defaultValues = homeDefaultValues,
+}: {
+  id?: string;
+  defaultValues?: HomeProps;
 }) {
-
   const form = useForm<HomeProps>({
     defaultValues,
     resolver: zodResolver(homeSchema),
   });
 
-  console.log(defaultValues)
+  // console.log(defaultValues);
 
   const {
     // setError,
@@ -38,12 +39,11 @@ export  default  function HomeForm({
 
   const onSubmit = async (values: HomeProps) => {
     // console.log("values", values);
-    let result
+    let result;
 
-    if(id){
-      result = await editHome({values, id})
-    }
-    else{
+    if (id) {
+      result = await editHome({ values, id });
+    } else {
       result = await createHome({ values });
     }
 
@@ -57,12 +57,32 @@ export  default  function HomeForm({
   };
 
   const handlePublish = async () => {
-    console.log("publisshhhh!")
-    const result = await publishToClient(PublishTypes.HOME_PAGE)
-  }
+    
+    const result = await publishToClient(
+      PublishTypes.HOME_PAGE
+    );
+  };
 
   return (
     <div className="w-full mt-16">
+      <button
+        onClick={() => handlePublish()}
+        disabled={isSubmitting}
+        className="w-[178px] flex justify-center items-center rounded-full gap-2.5"
+      >
+        {/* <span className="size-5">
+               {isSubmitting ? (
+                 published === true ? (
+                   <Spinner className="size-5" />
+                 ) : (
+                   <IconSend />
+                 )
+               ) : (
+                 <IconSend />
+               )}
+             </span> */}
+        Publish
+      </button>
       <FormProvider {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -99,13 +119,13 @@ export  default  function HomeForm({
                 </span> */}
                     Save
                   </Button>
-                  <Button
-                    type="submit"
+                  {/* <Button
+                  
                      onClick={() => handlePublish()}
                     disabled={isSubmitting}
                     className="w-[178px] flex justify-center items-center rounded-full gap-2.5"
-                  >
-                    {/* <span className="size-5">
+                  > */}
+                  {/* <span className="size-5">
                   {isSubmitting ? (
                     published === true ? (
                       <Spinner className="size-5" />
@@ -116,8 +136,8 @@ export  default  function HomeForm({
                     <IconSend />
                   )}
                 </span> */}
-                    Publish
-                  </Button>
+                  {/* Publish
+                  </Button> */}
                 </div>
               </div>
             </div>

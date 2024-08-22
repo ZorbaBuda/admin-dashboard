@@ -1,0 +1,17 @@
+{
+  "en": {
+    "home1": {
+      "title": "Title English edited",
+      "text": "<div className=\"ContentBoard\"><p>A difficult moment is when you think your problems are chronic, nothing helps you and no one knows how to tell you what's wrong.&nbsp;</p><blockquote><p><strong>What if I told you that even though you're at this point, now might be the best time?</strong></p></blockquote><p><strong>There is a reason for this to be so. Now I'll tell you what it is.</strong></p></div>",
+      "linkText": "Start here"
+    }
+  },
+  "es": {
+    "home1": {
+      "title": "Título español",
+      "text": "<div className=\"ContentBoard\"><p>Un momento complicado es cuando crees que tus problemas son crónicos, nada te ayuda y nadie te sabe decir qué te pasa.&nbsp;<br><br><strong>¿Y si te dijera que, aunque estés en este punto, ahora podría ser el mejor momento?</strong></p><p><strong>Hay una razón para que esto sea así. Ahora te contaré cuál es.</strong></p></div>",
+      "linkText": "Comienza aquí"
+    }
+  },
+  "__v": 0
+}

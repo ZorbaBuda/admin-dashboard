@@ -9,6 +9,7 @@ export async function GET(
 ) {
  
   const slug = params.slug;
+  console.log(slug)
 
   const { device, ua } = userAgent(request);
   const viewport = device.type === "mobile" ? "mobile" : "desktop";
