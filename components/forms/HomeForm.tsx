@@ -57,10 +57,15 @@ export default function HomeForm({
   };
 
   const handlePublish = async () => {
-    
-    const result = await publishToClient(
-      PublishTypes.HOME_PAGE
-    );
+    const result = await publishToClient(PublishTypes.ABOUT_PAGE);
+
+    if (result.success) {
+      toast.success(result.message);
+    } else if (result.error) {
+      toast.error(result.error);
+    } else {
+      toast.error("Error");
+    }
   };
 
   return (
@@ -89,14 +94,11 @@ export default function HomeForm({
           className="flex flex-col  gap-5 lg:border-b lg:border-border"
           noValidate
         >
-          <div className="w-full max-w-[622px] 2xl:max-w-[1170px] min-h-[90vh] lg:border-r lg:border-border lg:pr-5 flex flex-col gap-9">
+
+          <div className="w-full ] lg:border-r lg:border-border lg:pr-5 flex flex-col gap-9">
             <div className="flex flex-col lg:flex-row">
               <div>
                 <div className="text-3xl">Section 1</div>
-                <div>
-                  1)After editing, save changes . 2) Press "Publish" to update
-                  dictionaries in the client
-                </div>
               </div>
               <div className="mt-5 lg:w-[545px]">
                 <div className=" lg:flex justify-end items-center gap-3">
@@ -141,7 +143,9 @@ export default function HomeForm({
                 </div>
               </div>
             </div>
-            <div className="flex flex-col lg:flex-row gap-9">
+
+
+            <div className=" flex flex-col lg:flex-row gap-9">
               <InputField
                 label="EN Title:"
                 placeholder="Enter title"
@@ -173,6 +177,7 @@ export default function HomeForm({
               <TextEditorField label="EN text:" name="en.home1.text" />
               <TextEditorField label="ES text:" name="es.home1.text" />
             </div>
+
           </div>
         </form>
       </FormProvider>

@@ -1,7 +1,11 @@
 export const pagesLinks = [
   {
     name: "home page",
-    link: "/pages/home-page",
+    link: "/content/home-page",
+  },
+  {
+    name: "about page",
+    link: "/content/about-page",
   },
 ];
 

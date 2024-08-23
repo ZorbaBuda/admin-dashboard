@@ -5,7 +5,7 @@ import {
   IconMessage,
   IconSettings,
   IconCategories,
-  IconServerStack,
+  IconEdit,
 } from "@/components/icons";
 
 export const navLinks = [
@@ -15,9 +15,9 @@ export const navLinks = [
     icon: IconDashboard,
   },
   {
-   name: "Pages",
-   link: "/pages",
-   icon: IconBlog,
+   name: "Content",
+   link: "/content",
+   icon: IconEdit,
   },
   {
     name: "Blog",
@@ -43,11 +43,6 @@ export const navLinks = [
     name: "Message",
     link: "/message",
     icon: IconMessage,
-  },
-  {
-    name: "APIs",
-    link: "/api-endpoints",
-    icon: IconServerStack,
   },
   {
     name: "Settings",

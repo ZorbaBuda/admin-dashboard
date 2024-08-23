@@ -5,8 +5,6 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { IconLogout } from "@/components/icons";
-import LogoUploadModal from "@/components/modals/logo-upload-modal";
-import ContentBoardLogo from "@/components/logo/content-board";
 import DarkMode from "./dark-mode";
 import { navLinks } from "./navLinks";
 import useToggle from "@/hooks/use-toggle";
@@ -82,28 +80,8 @@ export default function UserSidebar({
         <div
           className={`h-full flex flex-col justify-between shadow-xl overflow-y-auto scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-200 dark:scrollbar-track-gray-800 dark:scrollbar-thumb-gray-600 bg-white dark:bg-custom-gray4`}
         >
-          <div className="w-[160px] mx-auto">
-            <div className="py-3 lg:py-7">
-              <div className="relative w-[160px] h-[100px]">
-                {logoUrl ? (
-                  <Image
-                    src={logoUrl}
-                    alt="static logo"
-                    sizes="200px"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                ) : (
-                  <LogoUploadModal>
-                    <div className="w-full h-full rounded-md bg-gray-200 flex justify-center items-center">
-                      <p className="text-gray-700">Add logo</p>
-                    </div>
-                  </LogoUploadModal>
-                )}
-              </div>
-            </div>
-
+          <div className="w-[160px] mx-auto my-auto">
+          
             <div className="mt-5 space-y-5 text-[17px]">
               {navLinks?.map((navLink, i) => (
                 <div key={i}>
@@ -157,20 +135,8 @@ export default function UserSidebar({
               <DarkMode />
             </div>
 
-            <ContentBoardLogo />
-            <div className="mt-3 text-xs text-center font-medium text-gray-600 dark:text-gray-400">
-              <p>{`© 2024, Contentboard`}</p>
-              <p>
-                Developed by:{" "}
-                <Link
-                  href="https://niloy.vercel.app"
-                  target="_blank"
-                  className="underline text-blue-500 hover:text-blue-900 dark:hover:text-blue-300 transition-colors duration-200"
-                >
-                  Niloy
-                </Link>
-              </p>
-            </div>
+          
+          
           </div>
         </div>
       </div>

@@ -1,13 +1,13 @@
 import UserHeader from "../_layout/header";
 
-export default function LayoutApiEndpoints({
+export default function LayoutPagesEdition({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <>
-      <UserHeader heading="API Endpoints" />
+      <UserHeader heading="Content edition" />
 
       {children}
     </>
