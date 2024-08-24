@@ -24,6 +24,9 @@ export default function HomeForm({
   id?: string;
   defaultValues?: HomeProps;
 }) {
+
+  const [section1Open, setSection1Open] = useState(false)
+  const [sectionMetadataOpen, setSectionMetadataOpen] = useState(false)
   const form = useForm<HomeProps>({
     defaultValues,
     resolver: zodResolver(homeSchema),
@@ -40,7 +43,7 @@ export default function HomeForm({
   const onSubmit = async (values: HomeProps) => {
     // console.log("values", values);
     let result;
-
+  //TODO revalidate path after save
     if (id) {
       result = await editHome({ values, id });
     } else {
@@ -57,7 +60,7 @@ export default function HomeForm({
   };
 
   const handlePublish = async () => {
-    const result = await publishToClient(PublishTypes.ABOUT_PAGE);
+    const result = await publishToClient(PublishTypes.HOME_PAGE);
 
     if (result.success) {
       toast.success(result.message);
@@ -97,9 +100,7 @@ export default function HomeForm({
 
           <div className="w-full ] lg:border-r lg:border-border lg:pr-5 flex flex-col gap-9">
             <div className="flex flex-col lg:flex-row">
-              <div>
-                <div className="text-3xl">Section 1</div>
-              </div>
+             
               <div className="mt-5 lg:w-[545px]">
                 <div className=" lg:flex justify-end items-center gap-3">
                   <Button
@@ -144,8 +145,54 @@ export default function HomeForm({
               </div>
             </div>
 
+            {/* seo metadata */}
+            <div
+                  onClick={() =>setSectionMetadataOpen(!sectionMetadataOpen)}
+                  className="text-xl font-semibold cursor-pointer"
+                  >
+                    Seo Metadata
+              </div>
+            <div className={`${sectionMetadataOpen ? 'flex flex-col gap-9' : 'hidden'} ease-in-out transition-all duration-500`}>
 
-            <div className=" flex flex-col lg:flex-row gap-9">
+            <div className='flex flex-col lg:flex-row gap-9'>
+              <InputField
+                label="EN Title:"
+                placeholder="Enter title"
+                name="en.metadata.title"
+              />
+
+              <InputField
+                label="ES Title:"
+                placeholder="Enter  title"
+                name="es.metadata.title"
+              />
+            </div>
+
+            <div className="flex flex-col lg:flex-row gap-9">
+              <InputField
+                label="EN Description:"
+                placeholder="Enter link text"
+                name="en.metadata.description"
+              />
+
+              <InputField
+                label="ES Description:"
+                placeholder="Enter link text"
+                name="es.metadata.description"
+              />
+            </div>
+           </div>
+
+            {/* section1 */}
+            <div
+                  onClick={() =>setSection1Open(!section1Open)}
+                  className="text-xl font-semibold cursor-pointer"
+                  >
+                    Section 1
+              </div>
+            <div className={`${section1Open ? 'flex flex-col gap-9' : 'hidden'} ease-in-out transition-all duration-500`}>
+
+            <div className='flex flex-col lg:flex-row gap-9'>
               <InputField
                 label="EN Title:"
                 placeholder="Enter title"
@@ -173,9 +220,11 @@ export default function HomeForm({
               />
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-9">
-              <TextEditorField label="EN text:" name="en.home1.text" />
+            <div className="flex flex-col lg:flex-row gap-9 ">
+              <TextEditorField label="EN text:" name="en.home1.text"  />
               <TextEditorField label="ES text:" name="es.home1.text" />
+            </div>
+
             </div>
 
           </div>

@@ -2,6 +2,10 @@ import { Schema, model, models } from "mongoose";
 
 const HomeSchema = new Schema({
   en: {
+    metadata: {
+     title: { type: String},
+     description: { type: String},
+    },
     home1: {
       title: { type: String },
       text: { type: String },
@@ -9,6 +13,10 @@ const HomeSchema = new Schema({
     },
   },
   es: {
+    metadata: {
+      title: { type: String},
+      description: { type: String},
+     },
     home1: {
       title: { type: String },
       text: { type: String },

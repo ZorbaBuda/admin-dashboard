@@ -1,23 +1,26 @@
-import type { Metadata } from "next";
-import { getAuthSession } from "@/lib/next-auth";
-import { getMessages } from "@/db/user/queries/get-messages";
 import { DataTable } from "@/components/data-table";
-import { messagesColumn } from "./messages-table/messages-column";
-import { deleteMessage } from "@/db/user/mutations/delete-message";
+import { getAuthSession } from "@/lib/next-auth";
+import { getContactForms } from "@/lib/services/queries/get-contact-forms";
+import { Metadata } from "next";
+import { contactFormsColumn } from "./contact-forms-table/contact-forms-column";
+import deleteContactForm from "@/lib/services/mutations/delete-contact-form";
+import { TContactForm } from "@/types";
+
 
 export const metadata: Metadata = {
-  title: "Messages",
-};
+    title: "Contact Forms Received",
+  };
 
-export default async function MessagePage({
-  searchParams: { limit, page, search, sort },
+export default async function ContactFormPage({
+    searchParams: { limit, page, search, sort },
 }: {
   searchParams: SearchParams;
 }) {
   const session = await getAuthSession();
 
   if (!session) return;
-  const userId = session?.user.id;
+
+  
 
   const limitNumber = Number(limit);
   const pageNumber = Number(page);
@@ -26,39 +29,35 @@ export default async function MessagePage({
   const sortBy = sortValues?.[0];
   const orderBy = sortValues?.[1];
 
-  const { messages, messagesCount } = await getMessages({
-    userId,
+  const { contactForms, contactFormsCount } = await getContactForms({
     sortBy,
     orderBy,
     limitNumber,
     pageNumber,
-    username: search,
+    name: search,
   });
+  
 
-  // console.log("messagesCount", messagesCount);
-
-  // if (!messages.length) {
-  //   return (
-  //     <p className="mt-20 text-xl text-center font-bold text-red-500">
-  //       No messages found
-  //     </p>
-  //   );
-  // }
+  // console.log(contactForms, contactFormsCount)
 
   return (
-    <div>
-      <p className="text-2xl font-bold my-5">All Messages</p>
+    <>
+      <div className="mt-10 flex justify-end">
+       
+      </div>
 
-      {messages && (
-        <DataTable
-          columns={messagesColumn}
-          data={messages}
-          searchBy="username"
-          count={messagesCount}
-          deleteAction={deleteMessage}
-          manualControl
-        />
-      )}
-    </div>
-  );
+      <div className="my-10">
+        {contactForms && (
+          <DataTable
+            columns={contactFormsColumn}
+            data={contactForms}
+            searchBy="contact-form"
+            count={contactFormsCount}
+            deleteAction={deleteContactForm}
+            manualControl
+          />
+        )}
+      </div>
+    </>
+  )
 }

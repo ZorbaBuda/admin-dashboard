@@ -19,6 +19,11 @@ export const navLinks = [
    link: "/content",
    icon: IconEdit,
   },
+   {
+    name: "Message",
+    link: "/message",
+    icon: IconMessage,
+  },
   {
     name: "Blog",
     link: "/blog",
@@ -39,11 +44,7 @@ export const navLinks = [
     link: "/media",
     icon: IconMedia,
   },
-  {
-    name: "Message",
-    link: "/message",
-    icon: IconMessage,
-  },
+ 
   {
     name: "Settings",
     link: "/settings",
