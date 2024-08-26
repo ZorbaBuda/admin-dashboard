@@ -4,7 +4,7 @@ import { getContactForms } from "@/lib/services/queries/get-contact-forms";
 import { Metadata } from "next";
 import { contactFormsColumn } from "./contact-forms-table/contact-forms-column";
 import deleteContactForm from "@/lib/services/mutations/delete-contact-form";
-import { TContactForm } from "@/types";
+import { SearchParams, TContactForm } from "@/types";
 
 
 export const metadata: Metadata = {

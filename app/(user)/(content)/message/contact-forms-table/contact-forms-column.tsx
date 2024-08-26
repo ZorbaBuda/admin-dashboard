@@ -35,6 +35,36 @@ export const contactFormsColumn: ColumnDef<TContactForm>[] = [
     enableHiding: false,
   },
   {
+    id: "actions",
+    cell: ({ row }) => (
+      <div>
+        <ContactFormsAction row={row} />
+      </div>
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Created at" manualSort />
+    ),
+    cell: ({ row }) => (
+      <div className="w-[220px]">
+        <ClientFormattedDate date={row.getValue("createdAt")} />
+      </div>
+    ),
+  },
+
+  {
+    accessorKey: "read",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Read" manualSort />
+    ),
+    cell: ({ row }) => (
+     <div>{row.getValue("read") ? "Read" : "Not read"}</div>
+   
+    )
+  },
+  {
     accessorKey: "name",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Name" manualSort />
@@ -71,24 +101,6 @@ export const contactFormsColumn: ColumnDef<TContactForm>[] = [
       <div>{row.getValue("message")}</div>
     ),
   },
-  {
-    accessorKey: "createdAt",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Created at" manualSort />
-    ),
-    cell: ({ row }) => (
-      <div className="w-[220px]">
-        <ClientFormattedDate date={row.getValue("createdAt")} />
-      </div>
-    ),
-  },
-
-  {
-    id: "actions",
-    cell: ({ row }) => (
-      <div>
-        <ContactFormsAction row={row} />
-      </div>
-    ),
-  },
+ 
+ 
 ];

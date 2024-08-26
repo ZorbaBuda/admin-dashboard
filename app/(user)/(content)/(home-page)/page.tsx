@@ -43,7 +43,7 @@ export default async function HomePage({
   // console.log("firstBlogYear", firstBlogYear);
 
   return (
-    <div>TODO graphs</div>
+    <div>Graphs of post views. Not working at this moment</div>
     // <div className="space-y-10 lg:space-y-16">
     //   <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
     //     <div className="lg:col-span-2">

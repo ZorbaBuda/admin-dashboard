@@ -8,6 +8,7 @@ const ContactFormSchema = new Schema(
     message: { type: String },
     date: { type: String },
     privacyConsent: { type: Boolean },
+    read: {type: Boolean }
   },
   {
     timestamps: true,

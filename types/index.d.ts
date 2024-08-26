@@ -68,6 +68,7 @@ type TContactForm = {
   message: string,
   date: string,
   privacyConsent: boolean,
+  read: boolean
   // newsletterCheck: boolean
 }
 

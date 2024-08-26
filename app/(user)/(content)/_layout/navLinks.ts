@@ -34,17 +34,11 @@ export const navLinks = [
     //   { name: "View Blog", link: "/blog/view" },
     // ],
   },
-  {
-    name: "Categories",
-    link: "/categories",
-    icon: IconCategories,
-  },
-  {
-    name: "Media",
-    link: "/media",
-    icon: IconMedia,
-  },
- 
+  // {
+  //   name: "Categories",
+  //   link: "/categories",
+  //   icon: IconCategories,
+  // },
   {
     name: "Settings",
     link: "/settings",

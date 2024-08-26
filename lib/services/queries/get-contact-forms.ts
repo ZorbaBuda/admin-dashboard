@@ -27,6 +27,10 @@ export async function getContactForms({
  const sortCase = () => {
     const orderByNum = orderBy == "asc" ? 1 : -1
     switch (sortBy) {
+      case "read":
+        return {
+          read: orderByNum,
+        };
       case "name":
         return {
           name: orderByNum,
